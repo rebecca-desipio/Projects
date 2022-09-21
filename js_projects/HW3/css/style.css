@@ -1,0 +1,51 @@
+
+/* ADD YOUR STYLES HERE */
+
+/*
+Bar Chart Styling
+ */
+.bar-titles{
+    font-family: "Bell MT" ;
+    font-size: 20px;
+}
+
+.bars{
+    fill: indianred;
+}
+
+#value-labels{
+    font-family: "Corbel Light";
+}
+
+#bar-axis{
+    font-family: "Bell MT";
+    font-size: 11px;
+}
+
+/*
+Area Chart Styling
+ */
+
+#area-chart{
+    fill: indianred;
+}
+
+#area-axis{
+    font-family: "Bell MT";
+    font-size: 13px;
+}
+
+/*
+Title
+ */
+h1 {
+    font-family: "Bell MT";
+    font-size: 25px;
+    position: relative;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top:  5px;
+    background: 100%;
+    background-color: #f7d9d9;
+    font-weight: bold;
+}

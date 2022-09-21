@@ -1,0 +1,1226 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Music Through the Decades</title>
+
+    <!-- Load CSS libraries -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" rel="stylesheet">
+
+    <link href="css/fullview.css" rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- GOOGLE FONTS -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,400italic,300italic' rel='stylesheet'
+          type='text/css'>
+</head>
+
+<body>
+<div id="fullview">
+    <div class="section" id="titlepage">
+        <div style="width:100%; margin-right:15%; margin-top:10%;float:right;">
+            <h1 id="title-text" >Music Through the Decades</h1>
+<!--            <h2 id="subtitle" style="float:right;">-->
+<!--                Elizabeth Christman, Rebecca DeSipio, <br> Adwait Pradhan, Surendrabikram Thapa-->
+<!--            </h2>-->
+        </div>
+    </div>
+
+    <div class="section" id="intro-text">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-5" style="font-family:Ebrima; font-size: 18px; text-align:center">
+                    <p>
+                        Music is a reflection of the times we live in. As our culture and society changes, so do the trends in music. In this data story,
+                        you will explore how music has changed over time, and what defined different eras of music.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="feature-explanation">
+        <div class="container" style="padding:3%; background-color:#d4d6d5">
+            <div class="">
+                <div class="align-self-center" style="text-align:center; font-family:Ebrima; font-size:18px;">
+                    <p>
+                        Throughout this data story, we will look at music as defined by the features assigned by
+                        <a href="https://en.wikipedia.org/wiki/The_Echo_Nest">Spotify's EchoNest.</a>
+                    </p>
+                </div>
+                <br>
+                <div class="" style="font-family: Ebrima; font-size:14px;">
+                    <p>
+                        <b>Acousticness</b>: A confidence measure from 0.0 to 1.0 of <span class="highlight">whether the track is acoustic</span>.
+                        1.0 represents high confidence the track is acoustic.
+                        <br>
+                        <b>Danceability</b>: Describes <span class="highlight">how suitable a track is for dancing</span> based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity.
+                        A value of 0.0 is least danceable and 1.0 is most danceable.
+                        <br>
+                        <b>Energy</b>: A measure from 0.0 to 1.0 and represents <span class="highlight">a perceptual measure of intensity and activity</span>.
+                        Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale.
+                        Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.
+                        <br>
+                        <b>Instrumentalness</b>: Predicts <span class="highlight">whether a track contains no vocals </span>. "Ooh" and "aah" sounds are treated as instrumental in this context.
+                        Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content.
+                        Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
+                        <br>
+                        <b>Liveness</b>: Detects <span class="highlight">the presence of an audience in the recording</span>. Higher liveness values represent an increased probability that the track was performed live.
+                        <br>
+                        <b>Speechiness</b>: Detects the <span class="highlight">presence of spoken words in a track</span>. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.
+                        <br>
+                        <b>Valence</b>: A measure from 0.0 to 1.0 describing <span class="highlight">the musical positiveness conveyed by a track</span>. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
+                    </p>
+                    <p>
+                        ***Definitions taken from <a href="https://developer.spotify.com/documentation/web-api/reference/#/operations/get-audio-features">Spotify's API.</a>***
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="intro-vis">
+        <div class="container" style="border-radius:5px;">
+                <div style="width: 50%; font-size: 14px; font-family: Ebrima; float:left;">
+                    <h3>How has music changed over time?</h3>
+                    <p>
+                        The line chart below shows the average value of each feature across albums that charted over time. <br>
+                        The histogram to the right shows the distribution of that feature value of albums in the selected decade. <br>
+                        <span class="highlight">Click any of the lines below</span> to see the respective histogram.
+                    </p>
+                </div>
+                <form style="width:10%; float:right; margin-right:15%; margin-top:5%">
+                    <label for="histogram-decade" style="font-family: Ebrima;">Choose a decade:</label>
+                    <select class="form-select form-select-smid" id="histogram-decade">
+                        <option value="1960">1960s</option>
+                        <option value="1970">1970s</option>
+                        <option value="1980">1980s</option>
+                        <option value="1990">1990s</option>
+                        <option value="2000">2000s</option>
+                        <option value="2010">2010s</option>
+                    </select>
+                </form>
+        </div>
+        <div class="container">
+            <div id="lineChart" style="height: 60vh; width: 50%; margin-top: 25px; float:left;">
+            </div>
+
+            <div class="row vis" id="histogram" style="height: 60vh; width: 50%;">
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="transition-to-topartists">
+        <div class="col-6" style="margin-top:-10%; font-size: 18px; font-family: Ebrima;">
+            <p>
+                Some of the attributes featured above, such as acousticness and energy, had distinct changes over time. <br>
+            </p>
+            <p>
+                We'll next look at the top five artists and albums per each decade.
+                Do you find the attribute trends of these artists matched the overall trends of the decade?
+            </p>
+        </div>
+    </div>
+
+    <div class="section" id="top-artists-sec">
+        <div class="row justify-content-center" id="top-artists-transition">
+            <div class="col-8" style="text-align:center">
+                <p>
+                    The below artists personified the trends of their time, with specific genres of music taking over a decade. Explore each decade using the buttons (left) to display the top five
+                    artists.
+                </p>
+            </div>
+        </div>
+
+        <div class="container" id="top-artists-vis" style="border-radius: 5px; height:100vh; width: 100%;">
+            <h1>Top 5 Artists of the Decade</h1>
+            <div class="col" style="width: 10%; float: left; height: 60vh">
+                <button class="btn decadeButtons" id="1960" style="margin-left: 50px">
+                    1960s
+                </button>
+                <button class="btn decadeButtons" id="1970" style="margin-left: 50px">
+                    1970s
+                </button>
+                <button class="btn decadeButtons" id="1980" style="margin-left: 50px">
+                    1980s
+                </button>
+                <button class="btn decadeButtons" id="1990" style="margin-left: 50px">
+                    1990s
+                </button>
+                <button class="btn decadeButtons" id="2000" style="margin-left: 50px">
+                    2000s
+                </button>
+                <button class="btn decadeButtons" id="2010" style="margin-left: 50px">
+                    2010s
+                </button>
+            </div>
+
+            <div class="col" id="artist-images" style="margin-left:10%">
+                <img alt="no artist yet" class="images" id="img1" src="artist_imgs/blank.png"
+                     style="margin-right: 4%; margin-left: 7%">
+                <img alt="no artist yet" class="images" id="img2" src="artist_imgs/blank.png"
+                     style="margin-right: 0%">
+                <img alt="no artist yet" class="images" id="img3" src="artist_imgs/blank.png"
+                     style="margin-left: 0%">
+                <img alt="no artist yet" class="images" id="img4" src="artist_imgs/blank.png"
+                     style="margin-right: 3%">
+                <img alt="no artist yet" class="images" id="img5" src="artist_imgs/blank.png">
+            </div>
+            <div class="artists" id="top-artists" style="height: 10%; margin-top:-5%; margin-left: 10%"></div>
+            <div class="row" id="top-artists-text">
+                <p style="font-size: 12px"><em>Note: The top 5 artists were selected based on "count" which represents the total number of times an artist's album charted per decade. </em></p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section" id="artist-to-album-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-5" style="text-align:start; margin-top:5%; font-size:18px; font-family: Ebrima">
+                    <p>
+                        After exploring the top albums, we can see that the <b>60's</b> were dominated by <b>jazz</b>,
+                        the <b>70's & 80's</b>  by <b>pop & rock</b>, the <b>90's country</b>, and the <b>2000's & 2010's</b>  by <b> rock</b> .
+                    </p>
+
+                    <p>
+                        Will the top albums follow the same trends as the top artists?
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section" id="top-albums" style="">
+        <div class="container">
+                <h1 style="margin-top: 2%">Top Albums of the Decades</h1>
+            <div class="container" style="">
+
+                <div align="center">
+                    <label for="select-box1" style="font-family: Ebrima; font-size:18px;">Select a decade:</label>
+                    <select class="form-select form-select-smid" id="select-box1" style="width:10%">
+                        <!--    <option>Select The Decade </option>-->
+                        <option value="1960">1960s</option>
+                        <option value="1970">1970s</option>
+                        <option value="1980">1980s</option>
+                        <option value="1990">1990s</option>
+                        <option value="2000">2000s</option>
+                        <option value="2010">2010s</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <div class="1960 GFG">
+                        <div id="topAlbums" class="carousel slide" data-interval="false">
+                            <div class="carousel-inner slider">
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                            <div class="card">
+                                                <img src="img/1960_1.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : My Fair Lady</h6>
+                                                    <h6> Artists :	Frederick Loewe</h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.58<br>
+                                                        Danceability : 0.37<br>
+                                                        Energy : 0.52<br>
+                                                        Instrumentalness : 0.12<br>
+                                                        Liveness : 0.35<br>
+                                                        Speechiness : 0.07<br>
+                                                        Valence : 0.42<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/1960_2.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : West Side Story</h6>
+                                                    <h6> Artists : Leonard Bernstein</h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.57<br>
+                                                        Danceability : 0.37<br>
+                                                        Energy : 0.51<br>
+                                                        Instrumentalness : 0.11<br>
+                                                        Liveness : 0.21<br>
+                                                        Speechiness : 0.03<br>
+                                                        Valence : 0.76<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/1960_3.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : The Shadow Of Your Smile</h6>
+                                                    <h6> Artists : Andy Williams </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.56<br>
+                                                        Danceability : 0.37<br>
+                                                        Energy : 0.53<br>
+                                                        Instrumentalness : 0.10<br>
+                                                        Liveness : 0.16<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.32<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="card">
+                                                <img src="img/1960_4.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Gentle On My Mind</h6>
+                                                    <h6> Artists : Glen Campbell </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.55<br>
+                                                        Danceability : 0.55<br>
+                                                        Energy : 0.49<br>
+                                                        Instrumentalness : 0.09<br>
+                                                        Liveness : 0.29<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.66<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm">
+                                            <div class="card">
+                                                <img src="img/1960_5.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : For Once In My Life</h6>
+                                                    <h6> Artists : Stevie Wonder </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.58<br>
+                                                        Danceability : 0.64<br>
+                                                        Energy : 0.52<br>
+                                                        Instrumentalness : 0.08<br>
+                                                        Liveness : 0.18<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.75<br>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#topAlbums" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#topAlbums" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="1970 GFG">
+                        <div id="topAlbums1" class="carousel slide" data-interval="false">
+                            <div class="carousel-inner slider">
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                            <div class="card">
+                                                <img src="img/1970_1.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Tapestry</h6>
+                                                    <h6> Artists : Carole King </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.35<br>
+                                                        Danceability : 0.41<br>
+                                                        Energy : 0.61<br>
+                                                        Instrumentalness : 0.12<br>
+                                                        Liveness : 0.18<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.58<br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/1980_1.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : The Dark Side Of The Moon</h6>
+                                                    <h6> Artists : Pink Floyd </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.34<br>
+                                                        Danceability : 0.51<br>
+                                                        Energy : 0.60<br>
+                                                        Instrumentalness : 0.09<br>
+                                                        Liveness : 0.20<br>
+                                                        Speechiness : 0.03<br>
+                                                        Valence : 0.44<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/1970_3.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Led Zeppelin IV</h6>
+                                                    <h6> Artists : Led Zeppelin </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.35<br>
+                                                        Danceability : 0.41<br>
+                                                        Energy : 0.61<br>
+                                                        Instrumentalness : 0.12<br>
+                                                        Liveness : 0.18<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.58<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/1970_4.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Close To You</h6>
+                                                    <h6> Artists : Carpenters </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.59<br>
+                                                        Danceability : 0.42<br>
+                                                        Energy : 0.42<br>
+                                                        Instrumentalness : 0.06<br>
+                                                        Liveness : 0.17<br>
+                                                        Speechiness : 0.03<br>
+                                                        Valence : 0.43<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/1970_5.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Naturally</h6>
+                                                    <h6> Artists : J. J. Cale </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.45<br>
+                                                        Danceability : 0.38<br>
+                                                        Energy : 0.48<br>
+                                                        Instrumentalness : 0.11<br>
+                                                        Liveness : 0.14<br>
+                                                        Speechiness : 0.03<br>
+                                                        Valence : 0.48<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#topAlbums1" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#topAlbums1" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="1980 GFG">
+                        <div id="topAlbums2" class="carousel slide" data-interval="false">
+                            <div class="carousel-inner slider">
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                            <div class="card">
+                                                <img src="img/1980_1.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : The Dark Side Of The Moon</h6>
+                                                    <h6> Artists : Pink Floyd </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.28<br>
+                                                        Danceability : 0.74<br>
+                                                        Energy : 0.74<br>
+                                                        Instrumentalness : 0.029<br>
+                                                        Liveness : 0.11<br>
+                                                        Speechiness : 0.05<br>
+                                                        Valence : 0.78<br>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/1980_2.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Memories</h6>
+                                                    <h6> Artists : Barbra Streisand </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.28<br>
+                                                        Danceability : 0.41<br>
+                                                        Energy : 0.34<br>
+                                                        Instrumentalness : 0.039<br>
+                                                        Liveness : 0.31<br>
+                                                        Speechiness : 0.03<br>
+                                                        Valence : 0.35<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/1980_3.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Escape</h6>
+                                                    <h6> Artists : Journey </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.33<br>
+                                                        Danceability : 0.64<br>
+                                                        Energy : 0.47<br>
+                                                        Instrumentalness : 0.035<br>
+                                                        Liveness : 0.14<br>
+                                                        Speechiness : 0.03<br>
+                                                        Valence : 0.69<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/1980_4.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Pride</h6>
+                                                    <h6> Artists : White Lion </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.15<br>
+                                                        Danceability : 0.65<br>
+                                                        Energy : 0.57<br>
+                                                        Instrumentalness : 0.028<br>
+                                                        Liveness : 0.16<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.59<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/1980_5.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Don't Stop </h6>
+                                                    <h6> Artists : Fleetwood Mac </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.10<br>
+                                                        Danceability : 0.42<br>
+                                                        Energy : 0.90<br>
+                                                        Instrumentalness : 0.001<br>
+                                                        Liveness : 0.25<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.52<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#topAlbums2" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#topAlbums2" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="1990 GFG">
+                        <div id="topAlbums3" class="carousel slide" data-interval="false">
+                            <div class="carousel-inner slider">
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                            <div class="card">
+                                                <img src="img/1990_1.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Secrets</h6>
+                                                    <h6> Artists : Toni Braxton </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.11<br>
+                                                        Danceability : 0.72<br>
+                                                        Energy : 0.68<br>
+                                                        Instrumentalness : 0.045<br>
+                                                        Liveness : 0.13<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.66<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/1990_2.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : MCMXC A.D.</h6>
+                                                    <h6> Artists : Enigma </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.013<br>
+                                                        Danceability : 0.57<br>
+                                                        Energy : 0.75<br>
+                                                        Instrumentalness : 0.10<br>
+                                                        Liveness : 0.17<br>
+                                                        Speechiness : 0.06<br>
+                                                        Valence : 0.62<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/1990_3.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Metallica</h6>
+                                                    <h6> Artists : Metallica </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.373<br>
+                                                        Danceability : 0.66<br>
+                                                        Energy : 0.56<br>
+                                                        Instrumentalness : 0.03<br>
+                                                        Liveness : 0.08<br>
+                                                        Speechiness : 0.03<br>
+                                                        Valence : 0.54<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/1990_4.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Nevermind</h6>
+                                                    <h6> Artists : Nirvana </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.44<br>
+                                                        Danceability : 0.54<br>
+                                                        Energy : 0.55<br>
+                                                        Instrumentalness : 0.12<br>
+                                                        Liveness : 0.18<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.59<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/1990_5.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Ten</h6>
+                                                    <h6> Artists : Pearl Jam </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.51<br>
+                                                        Danceability : 0.55<br>
+                                                        Energy : 0.60<br>
+                                                        Instrumentalness : 0.040<br>
+                                                        Liveness : 0.25<br>
+                                                        Speechiness : 0.07<br>
+                                                        Valence : 0.62<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#topAlbums3" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#topAlbums3" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="2000 GFG">
+                        <div id="topAlbums4" class="carousel slide" data-interval="false">
+                            <div class="carousel-inner slider">
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                            <div class="card">
+                                                <img src="img/2000_1.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : A Place In The Sun</h6>
+                                                    <h6> Artists : Lit </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.15<br>
+                                                        Danceability : 0.69<br>
+                                                        Energy : 0.69<br>
+                                                        Instrumentalness : 0.019<br>
+                                                        Liveness : 0.43<br>
+                                                        Speechiness : 0.39<br>
+                                                        Valence : 0.60<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/2000_2.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Fly</h6>
+                                                    <h6> Artists : The Chicks </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.88<br>
+                                                        Danceability : 0.58<br>
+                                                        Energy : 0.17<br>
+                                                        Instrumentalness : 0.001<br>
+                                                        Liveness : 0.12<br>
+                                                        Speechiness : 0.03<br>
+                                                        Valence : 0.35<br>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/2000_3.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Shine</h6>
+                                                    <h6> Artists : Joni Mitchell </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.618<br>
+                                                        Danceability : 0.61<br>
+                                                        Energy : 0.73<br>
+                                                        Instrumentalness : 0.035<br>
+                                                        Liveness : 0.19<br>
+                                                        Speechiness : 0.10<br>
+                                                        Valence : 0.60<br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/2000_4.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : The Look Of Love </h6>
+                                                    <h6> Artists : Diana Krall </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.017<br>
+                                                        Danceability : 0.43<br>
+                                                        Energy : 0.90<br>
+                                                        Instrumentalness : 0.004<br>
+                                                        Liveness : 0.16<br>
+                                                        Speechiness : 0.05<br>
+                                                        Valence : 0.43<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/2000_5.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Breathe</h6>
+                                                    <h6> Artists : Faith Hill </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.66<br>
+                                                        Danceability : 0.66<br>
+                                                        Energy : 0.61<br>
+                                                        Instrumentalness : 0.002<br>
+                                                        Liveness : 0.14<br>
+                                                        Speechiness : 0.10<br>
+                                                        Valence : 0.65<br>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#topAlbums4" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#topAlbums4" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="2010 GFG">
+                        <div id="topAlbums5" class="carousel slide" data-interval="false">
+                            <div class="carousel-inner slider">
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                            <div class="card">
+                                                <img src="img/2010_1.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Journey's Greatest Hits</h6>
+                                                    <h6> Artists : Journey </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.02<br>
+                                                        Danceability : 0.53<br>
+                                                        Energy : 0.72<br>
+                                                        Instrumentalness : 0.07<br>
+                                                        Liveness : 0.22<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.55<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/2010_2.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Legend: The Best Of Bob Marley</h6>
+                                                    <h6> Artists : Bob Marley </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.36<br>
+                                                        Danceability : 0.46<br>
+                                                        Energy : 0.57<br>
+                                                        Instrumentalness : 0.0048<br>
+                                                        Liveness : 0.14<br>
+                                                        Speechiness : 0.04<br>
+                                                        Valence : 0.42<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <img src="img/2010_3.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Doo-Wops & Hooligans</h6>
+                                                    <h6> Artists : Bruno Mars </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.391<br>
+                                                        Danceability : 0.66<br>
+                                                        Energy : 0.382<br>
+                                                        Instrumentalness : 0<br>
+                                                        Liveness : 0.09<br>
+                                                        Speechiness : 0.03<br>
+                                                        Valence : 0.43<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/2010_4.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : 21</h6>
+                                                    <h6> Artists : Adele </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.33<br>
+                                                        Danceability : 0.57<br>
+                                                        Energy : 0.55<br>
+                                                        Instrumentalness : 0.005<br>
+                                                        Liveness : 0.17<br>
+                                                        Speechiness : 0.12<br>
+                                                        Valence : 0.46<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <img src="img/2010_5.jpg" class="card-img-top cimage" alt="...">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Album Name : Curtain Call: The Hits</h6>
+                                                    <h6> Artists : Eminem </h6>
+                                                    <p class="card-text">
+                                                        Acousticness : 0.10<br>
+                                                        Danceability : 0.64<br>
+                                                        Energy : 0.59<br>
+                                                        Instrumentalness : 0.002<br>
+                                                        Liveness : 0.12<br>
+                                                        Speechiness : 0.12<br>
+                                                        Valence : 0.44<br>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#topAlbums5" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#topAlbums5" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="section" id="main-message-text">
+                <div style="font-size:18px; font-family:Ebrima; width:40%; text-align:center; margin-right:-40%">
+                    <p>
+                        As we all know, music has changed drastically over the past couple of decades.
+                        Between societal trends and technological advancements, new styles of music emerged.
+                    </p>
+                    <p>
+                        Even music players evolved from record players to jukeboxes, cassette tapes and CDs, to iPods and now streaming services on any device.
+                    </p>
+                    <p>
+                        The attributes of music followed suit. Let's now take a close look at the overall changes across the decades.
+                    </p>
+                </div>
+    </div>
+
+
+    <div class="section" id="decade-features">
+        <div class="container" style="width:100%">
+        <div class="row">
+            <h1>
+                Features of Each Decade
+            </h1>
+            <div class="col-4" id="decade-feature-text">
+                <p>
+                    <span style="color: #C29BA3; font-weight: bold; font-size: 18px">1960's</span> and <span style="color: #E3BFB7; font-weight: bold; font-size: 18px">1970's</span>
+                    were the most <b>instrumental</b>, <b>lively</b>, and <b>acoustic</b> decades
+                </p>
+                <p><span style="color: #8A9BA7; font-weight: bold; font-size: 18px">2000's</span> and <span style="color: #445A67; font-weight: bold; font-size: 18px">2010's</span>
+                    were the most <b>energetic</b>, <b>loud</b>, and <b>speechy</b> decades</p>
+                <p>These results are the reverse for the <em>lowest</em> of these categories </p>
+                <p>
+                    Additionally, the <span style="color: #C29BA3; font-weight: bold; font-size: 18px">1960's</span> and <span style="color: #E3BFB7; font-weight: bold; font-size: 18px">1970's</span>
+                    are notably the least <b>danceable</b>,
+                    and the <span style="color: #8A9BA7; font-weight: bold; font-size: 18px">2000's</span>  and <span style="color: #445A67; font-weight: bold; font-size: 18px">2010's</span>
+                    had the lowest <b>valence</b> scores.
+                </p>
+            </div>
+            <div class="col-8">
+
+
+                <form style="width: 20%; float: left; font-family: Ebrima">
+                    <label for="sort-by">Sort By: </label>
+                    <select class="form-select form-select-smid" id="sort-by">
+                        <option value="most">Descending</option>
+                        <option value="least">Ascending</option>
+                    </select>
+                </form>
+    <!--            <p style="margin-left: 25%; margin-top: 3%; width: 15%; height: 10%; font-size: 17px; font-family: Georgia"> Decade Color Code: </p>-->
+                <div id="decadeLegend" style="height: 10%; margin-left: 20%">
+
+                </div>
+
+                <div class="col" id="summarySlide" style="width: 100%; height: 75vh"></div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+    <div class="section" id="transition-to-outlierAlbums">
+        <div class="col-5" style="margin-top: 13%; margin-right: 30%; float:right; text-align: center">
+            <p style="font-size:18px; font-family: Ebrima">
+                While each decade has a distinctly unique style of music, like many other aspects of pop culture, musical trends
+                can be cyclical. Albums sometimes see a resurgence in popularity a decade or more after its release, due to nostalgia or
+                recurring trends.
+            </p>
+        </div>
+    </div>
+
+
+
+    <div class="section" id="outlier-albums">
+        <div class="container">
+            <div class="" style="margin-top:5%; text-align: center">
+                <p style="font-family: Ebrima; font-size:18px;">
+                    Select an album to compare its features to the averages of the decade it released in and the
+                    averages of the decade it charted in.
+                </p>
+            </div>
+            <div class="" style="margin-top:5%">
+                <div style="margin-left:15%">
+                    <div id="selectButtons" style="font-family: Ebrima; font-size:16px">
+                        <select id="selectSortButton">
+                            <option value="release_date">Released in:</option>
+                            <option value="chart_date">Charted in:</option>
+                        </select>
+                        <select id="selectDecadeButton">
+                            <option value="1960">1960s</option>
+                            <option value="1970">1970s</option>
+                            <option value="1980">1980s</option>
+                            <option value="1990">1990s</option>
+                            <option value="2000">2000s</option>
+                            <option value="2010">2010s</option>
+                        </select>
+                        <select id="selectAlbumButton" style="width:60%"></select>
+                    </div>
+                    <div id="albumInfo" style="height:10vh; border: black"></div>
+                </div>
+                <div id="yearComparisons" style="height: 70vh;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="transition-to-sliders">
+        <div class="container" style="text-align:center; margin-top:2%; width:50%; font-family: Ebrima; font-size:18px;">
+            <p>
+                Over the last 60 years, we've seen all different genres and styles of music reach the charts. With decades of music at our fingertips thanks to streaming
+                services like Spotify, it's easier than ever to find music that you enjoy, even if you don't like what's popular now.
+            </p>
+            <p>
+                Using what you've learned about music through the decades, in our final visualization you'll be able
+                to try different attribute values to find music that best suits you.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="section" id="sliders">
+        <div class="row justify-content-between">
+            <div class="col-2" id = "color-picker" style="margin-top: 10%; background-color: rgba(255, 255, 255, 0.75);"><p id="value-color-picker"></p>
+                <div class="row align-items-center">
+                    <div class="col-sm" id="color-picker0" align="right" style="font-size:16px; font-family: Ebrima;">
+                        <p id="value-color-picker0">Acousticness</p>
+                    </div>
+                </div>
+                <div class="row align-items-center" style="margin-top:15%">
+                    <div class="col-sm" id="color-picker1" align="right" style="font-size:16px; font-family: Ebrima;">
+                        <p id="value-color-picker1">Danceability</p>
+                    </div>
+                </div>
+                <div class="row align-items-center" style="margin-top:15%">
+                    <div class="col-sm" id="color-picker2" align="right" style="font-size:16px; font-family: Ebrima;">
+                        <p id="value-color-picker2">Energy</p>
+                    </div>
+                </div>
+                <div class="row align-items-center" style="margin-top:15%;">
+                    <div class="col-sm" id="color-picker3" align="right" style="font-size:16px; font-family: Ebrima;">
+                        <p id="value-color-picker3">Instrumentalness</p>
+                    </div>
+                </div>
+                <div class="row align-items-center" style="margin-top:15%">
+                    <div class="col-sm" id="color-picker4" align="right" style="font-size:16px; font-family: Ebrima;top:-6px;">
+                        <p id="value-color-picker4">Liveness</p>
+                    </div>
+                </div>
+                <div class="row align-items-center" style="margin-top:15%">
+
+                    <div class="col-sm" id="color-picker6" align="right" style="font-size:16px; font-family: Ebrima;top:32px;">
+                        <p id="value-color-picker6">Speechiness</p>
+                    </div>
+                </div>
+                <div class="row align-items-center" style="margin-top:10%">
+                    <div class="col-sm" id="color-picker8" align="right" style="font-size:16px; font-family: Ebrima;top:74px;">
+                        <p id="value-color-picker8">Valence</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-4" id ="slider-div" style="margin-top: 10%; background-color: rgba(255, 255, 255, 0.90);">
+                <div id="slider-color-picker"></div>
+
+            </div>
+            <div class="col" style="font-family:Ebrima; font-size: 18px; background-color: rgba(255, 255, 255, 0.90);">
+                <div id="sliders-description" style="margin-top:15%; text-align: center;">
+                    <p>Use the sliders to input values for different features of music</p>
+                    <p>The year with the lowest prediction error is given as output.</p>
+                    <p style="font-size:12px; text-align: end;">*Predictions calculated using <a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation">RMSE</a></p>
+                </div>
+                <div id="sliders-output" style="width: 75%; margin:15%; background-color: white; border: 2px solid black; border-radius:5px; margin-top: 15%; font-family:Ebrima; font-size: 16px; text-align: center;">
+                    <p id="value-final0">
+                        The year that best matches your choices is</p>
+                    <p id="value-final" style="font-size:24px;"></p>
+                    <p><b>Average values for this year:</b></p>
+                    <div style="width:50%; margin:auto;">
+                        <p id="acousticness"></p>
+                        <p id="danceability"></p>
+                        <p id="energy"></p>
+                        <p id="instrumentalness"></p>
+                        <p id="liveness"></p>
+                        <p id="speechiness"></p>
+                        <p id="valence"></p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="section" id="sources">
+        <h1 style="font-size: 100px">Team EARS</h1>
+        <div class="container" style="margin-top:5%">
+            <div class="row" style="font-family: Ebrima; font-size:14px;">
+                <div class="col justify-content-center">
+                    <div class="col text-center">
+                        <img src="background_imgs/elizabeth_headshot.jpg" width="200" height="200">
+                    </div>
+                    <br>
+                    <p style="text-align: center">
+                        Elizabeth Christman
+                        <br>
+                        M.S Computer Science
+                    </p>
+                </div>
+                <div class="col">
+                    <div class="col text-center">
+                        <img src="background_imgs/rebecca_headshot.jpg" width="200" height="200">
+                    </div>
+                    <br>
+                    <p style="text-align: center">
+                        Rebecca DeSipio
+                        <br>
+                        M.S Computer Engineering
+                    </p>
+                </div>
+                <div class="col">
+                    <div class="col text-center">
+                        <img src="background_imgs/adwait_headshot.jpg" width="200" height="200">
+                    </div>
+                    <br>
+                    <p style="text-align: center">
+                        Adwait Pradhan
+                        <br>
+                        M.Eng Computer Science
+                    </p>
+                </div>
+                <div class="col">
+                    <div class="col text-center">
+                        <img src="background_imgs/suren_headshot.jpg" width="200" height="200">
+                    </div>
+                    <br>
+                    <p style="text-align: center">
+                        Surendrabikram Thapa
+                        <br>
+                        M.S Computer Science
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:5%"></div>
+            <p style="font-size: 14px; font-family: Ebrima">
+                All data, code, and image citations can be found at our <a href="https://github.com/AdwaitVT/Guided-Project2">GitHub</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- embedding JS libraries -->
+<script src="//cdn.amcharts.com/lib/5/index.js"></script>
+<script src="//cdn.amcharts.com/lib/5/hierarchy.js"></script>
+<script src="//cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script crossorigin="anonymous"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- d3 -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<script src="https://unpkg.com/d3-simple-slider"></script>
+
+<script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="js/fullview.js" type="text/javascript"></script>
+
+
+<!-- own js files -->
+<script src="js/slider.js"></script>
+<script src="js/histogram.js"></script>
+<script src="js/decadeTopArtists.js"></script>
+<script src="js/mainMessage.js"></script>
+<script src="js/albumInfo.js"></script>
+<script src="js/albumComparisons.js"></script>
+<script src="js/lineChart.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
