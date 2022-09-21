@@ -10,6 +10,15 @@ Main files:
  - objectDetection.ipynb (used to find the center locations of the spirals)
  - code_files/archSpiral, imagePreprocessing, and plottingFunctions hold functions that are called in rev4 notebook - solely used to keep the code a bit cleaner
 
+## Music Through the Decades
+Data visualization storyboard exploring the trends in music data across the decades.
+Link to published GitPages storyboard, submitted for course project. Voted top project by the professor. https://adwaitvt.github.io/Guided-Project2/
+
+Main Contributions:
+- js/decadeTopArtists.js
+- js/mainMessage.js
+- Designed and implemented the structure and aesthetic features of the storyboard using HTML and CSS
+
 ## Course assignments using JavaScript (and D3), HTML, and CSS
 
 Coded from scratch:
@@ -21,13 +30,12 @@ Coded from template:
  - Lab 10: Integrated event handling to connect mutliple visualization components and UI elements. Completed the barchart visualization.
  - HW4: Interactive Covid Dashboard - implemented chloropleth map and bar charts.
 
-## Music Through the Decades
-Data visualization storyboard exploring the trends in music data across the decades.
+## Computer Vision Tasks
+ - Contours: implemented three algorithms: Pavlidis contour extractor, Gaussian area estimation, nad discrete curve evolution 
+ - Harris Corner Detection: implemented harris corner detection and compared against OpenCV corner detection method
+ - Image Stitching: implemented image stitching algorithm by finding proper geometric transformations and combined three images into a single resulting image
+ - QR code reader: program that performs the first steps of QR code recognition - find the QR code in an image and produce a recitified image
 
-Main Contributions:
-- js/decadeTopArtists.js
-- js/mainMessage.js
-- Designed and implemented the structure and aesthetic features of the storyboard using HTML and CSS
 
 
 ## Morse Code Translator
