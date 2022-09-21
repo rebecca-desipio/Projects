@@ -5,6 +5,12 @@ Description: Using a hand-drawn spiral public \href{dataset}{https://www.kaggle.
 
 ## Course assignments using JavaScript, HTML, CSS, and D3 (each coded from scratch)
 
+Coded from scratch:
+ - HW2, HW3, Lab6, Lab 9
+
+Coded from template:
+ - Lab 10, HW4
+
 ## Music Through the Decades
 Data visualization storyboard exploring the trends in music data across the decades.
 
