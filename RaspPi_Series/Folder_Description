@@ -1,7 +1,0 @@
-All projects are written in Python.
-
-Magic8.py - workshop 1 to teach students the basics of coding. 
-TrafficLight - workshop 2 to introduce basic hardware and use of rpi GPIO.
-tic-tac-toe_task1 - two player tic-tac-toe game -> software only
-tic-tac-toe_task2 - single player (vs. computer) -> software only
-tic-tac-toe_final - implementation of first two tasks with both hardware and software. Hardware uses RGB LEDs to create a visual of the board and a 7 segment display to show either player 1 or player 2. 
